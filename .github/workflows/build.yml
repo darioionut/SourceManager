@@ -1,0 +1,28 @@
+name: Build Source Engine Manager
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Restore NuGet packages
+      run: nuget restore SourceEngineManager.sln
+
+    - name: Build application
+      run: msbuild SourceEngineManager.sln /p:Configuration=Release
+
+    - name: Upload Executable Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: source-engine-manager-exe
+        path: SourceEngineManager/bin/Release/SourceEngineManager.exe
