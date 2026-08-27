@@ -16,10 +16,10 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Restore NuGet packages
-      run: nuget restore SourceEngineManager.sln
+      run: nuget restore SourceEngineManager/SourceEngineManager.csproj
 
     - name: Build application
-      run: msbuild SourceEngineManager.sln /p:Configuration=Release
+      run: msbuild SourceEngineManager/SourceEngineManager.csproj /p:Configuration=Release
 
     - name: Upload Executable Artifact
       uses: actions/upload-artifact@v4
