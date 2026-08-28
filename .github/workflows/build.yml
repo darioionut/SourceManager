@@ -18,10 +18,10 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Publish application
-      run: dotnet publish SourceManager.csproj -c Release
+      run: dotnet publish SourceManager/SourceManager.csproj -c Release
 
     - name: Upload Executable Artifact
       uses: actions/upload-artifact@v4
       with:
         name: source-engine-manager-exe
-        path: bin/Release/net8.0-windows/win-x64/publish/SourceManager.exe
+        path: SourceEngineManager/bin/Release/net8.0-windows/win-x64/publish/SourceManager.exe
