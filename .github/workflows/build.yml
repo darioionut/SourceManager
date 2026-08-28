@@ -12,17 +12,16 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v4
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
 
-    - name: Restore NuGet packages
-      run: nuget restore SourceEngineManager/SourceEngineManager.csproj
-
-    - name: Build application
-      run: msbuild SourceEngineManager/SourceEngineManager.csproj /p:Configuration=Release
+    - name: Publish application
+      run: dotnet publish SourceEngineManager/SourceEngineManager.csproj -c Release
 
     - name: Upload Executable Artifact
       uses: actions/upload-artifact@v4
       with:
         name: source-engine-manager-exe
-        path: SourceEngineManager/bin/Release/SourceEngineManager.exe
+        path: SourceEngineManager/bin/Release/net8.0-windows/win-x64/publish/SourceManager.exe
